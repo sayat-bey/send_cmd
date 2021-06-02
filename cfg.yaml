@@ -1,0 +1,5 @@
+# - conf command 1
+# - conf command 2
+
+- ip access-list standard MGMT
+- 15 permit host 82.200.128.2
