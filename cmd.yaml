@@ -2,4 +2,4 @@
 # - show command 2
 
 
-- show inventory | in PID
+- admin show install committed summary

@@ -121,9 +121,10 @@ def get_arguments(arguments):
                 settings["maxth"] = int(match[1])
         elif arg == "cfg":
             settings["conf"] = True
-        elif i in ("xr", "xe", "hua", "mx"):
-            settings["os_type"] = i
+        elif arg in ("xr", "xe", "hua", "mx"):
+            settings["os_type"] = arg
 
+    print()
     print(
           f"max threads:...................{settings['maxth']}\n"
           f"config mode:...................{settings['conf']}\n"
@@ -135,6 +136,7 @@ def get_arguments(arguments):
 def get_user_pw():
     username = input("Enter login: ")
     password = getpass()
+    print()
     return username, password
 
 
@@ -170,15 +172,17 @@ def get_device_info(yaml_file, settings):
 
 def cmd(device, settings):
     if settings["conf"]:
-        with open("conf.yaml", "r") as file:
+        with open("cfg.yaml", "r") as file:
             yaml_input = yaml.load(file, yaml.SafeLoader)
             device.configure(yaml_input)
             device.commit()
+        if "%" in "".join(device.conf_logs):
+            print(f"{device.hostname:23}{device.ip_address:16}configuration ERROR %")
     else:
         with open("cmd.yaml", "r") as file:
             yaml_input = yaml.load(file, yaml.SafeLoader)
             for cmd in yaml_input:
-                device.send_commands(cmd)
+                device.show_commands(cmd)
 
 
 def write_logs(devices, current_time, log_folder, settings):
