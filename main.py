@@ -134,10 +134,10 @@ def get_arguments(arguments):
 
 
 def get_user_pw():
-    username = input("Enter login: ")
-    password = getpass()
-    print()
-    return username, password
+    with open("psw.yaml") as file:
+        user_psw = yaml.load(file, yaml.SafeLoader)
+
+    return user_psw[0], user_psw[1]
 
 
 def get_device_info(yaml_file, settings):
@@ -302,7 +302,7 @@ print("---------------------- --------------- ----------------------------------
 
 for i in range(settings["maxth"]):
     thread = Thread(target=connect_dev, args=(username, password, q, settings))
-    thread.setDaemon(True)
+    thread.daemon = True
     thread.start()
 
 for device in devices:
