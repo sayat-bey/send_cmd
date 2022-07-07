@@ -2,4 +2,4 @@
 # - show command 2
 
 
-- show logging
+- show running-config | in logging host

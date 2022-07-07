@@ -1,4 +1,4 @@
 # - conf command 1
 # - conf command 2
 
-- aaa group server tacacs+ KZTMBH12 server-private 10.239.30.227 port 49 key 7 032F5A31080A351E1E584A063E2612
+- logging host 212.19.149.62
