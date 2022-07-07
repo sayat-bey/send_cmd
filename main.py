@@ -258,7 +258,7 @@ def connect_dev(my_username, my_password, dev_queue, settings):
             except SSHException:
                 if i == 2:  # tries
                     device.connection_status = False
-                    device.connection_error_msg = str(err_msg)
+                    device.connection_error_msg = str(SSHException)
                     print(f"{device.hostname:23}{device.ip_address:16}BREAK SSHException occurred \t i={i}")
                     dev_queue.task_done()
                     break
